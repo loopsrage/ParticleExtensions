@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2017
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParticleSystemTest.Plugins", "ParticleSystemTest.Plugins.csproj", "{4106844C-AFF5-0A3A-D08F-C206805DB379}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParticleSystemTest", "ParticleSystemTest.csproj", "{46108B1D-B95C-7386-194D-4C14FD61F5E3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParticleSystemTest.Editor.Plugins", "ParticleSystemTest.Editor.Plugins.csproj", "{DBDC1844-8A65-6D72-E55B-BBA89715ABA1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4106844C-AFF5-0A3A-D08F-C206805DB379}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4106844C-AFF5-0A3A-D08F-C206805DB379}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4106844C-AFF5-0A3A-D08F-C206805DB379}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4106844C-AFF5-0A3A-D08F-C206805DB379}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46108B1D-B95C-7386-194D-4C14FD61F5E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46108B1D-B95C-7386-194D-4C14FD61F5E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46108B1D-B95C-7386-194D-4C14FD61F5E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46108B1D-B95C-7386-194D-4C14FD61F5E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DBDC1844-8A65-6D72-E55B-BBA89715ABA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DBDC1844-8A65-6D72-E55B-BBA89715ABA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DBDC1844-8A65-6D72-E55B-BBA89715ABA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DBDC1844-8A65-6D72-E55B-BBA89715ABA1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

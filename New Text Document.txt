@@ -1,0 +1,61 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class ParticleTest : MonoBehaviour {
+
+    // Use this for initialization
+    private ParticleSystem PS;
+    public ParticleSystem part;
+    public List<ParticleCollisionEvent> collisionEvents;
+    public Transform Target;
+    public Rigidbody RB;
+    void Start () {
+        gameObject.AddComponent<ParticleSystem>();
+        PS = gameObject.GetComponent<ParticleSystem>();
+        RB = GetComponent<Rigidbody>();
+
+        PS.ParticleMainSettings(true, 0, 1f, 100f,2f);
+        AnimationCurve EmissionCurve = new AnimationCurve();
+        AnimationCurve SizeCurve = new AnimationCurve();
+        SizeCurve.AddKey(0f,10f);
+        SizeCurve.AddKey(3f,0f);
+        EmissionCurve.AddKey(0f, 1f);
+        PS.ParticleEmissionSettings(true, 1, true, false, null, EmissionCurve);
+        PS.ParticleShapeSettings(true, ParticleSystemShapeType.Cone, ParticleSystemShapeMultiModeValue.Loop, true, 0, 0, 1);
+        PS.ParticleRotationSettings();
+        PS.ParticleSizeOverLifetimeSettings(true, 1, SizeCurve);
+        PS.ParticleTrailSettings();
+        string[] Layers = new string[] { "Players" };
+
+        PS.ParticleCollisionSettings(true,0,0.1f,ParticleSystemCollisionMode.Collision3D,ParticleSystemCollisionQuality.High,
+            ParticleSystemCollisionType.World,true,true,Layers);
+        PS.ParticleRendererSettings(true, "Capsule", "Fire", "Fire",ParticleSystemRenderMode.Mesh);
+
+        part = GetComponent<ParticleSystem>();
+        collisionEvents = new List<ParticleCollisionEvent>();
+        RB.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationZ |
+            RigidbodyConstraints.FreezeRotationX |
+            RigidbodyConstraints.FreezeRotationY;
+    }
+    private void OnParticleCollision(GameObject other)
+    {
+        int numCollisionEvents = part.GetCollisionEvents(other, collisionEvents);
+        Rigidbody rb = other.GetComponent<Rigidbody>();
+        int i = 0;
+        while (i < numCollisionEvents)
+        {
+            if (rb)
+            {
+                Vector3 pos = collisionEvents[i].intersection;
+                Vector3 force = collisionEvents[i].velocity * 10;
+                rb.AddForce(force);
+            }
+            i++;
+        }
+    }
+    // Update is called once per frame
+    void Update () {
+        transform.Rotate(Vector3.right, 1000f * Time.deltaTime);
+	}
+}
