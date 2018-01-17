@@ -18,17 +18,18 @@ public class MoveCastTest : MonoBehaviour
     void Update()
     {
         Vector3 TargetLocation = fpsCam.ViewportToWorldPoint(new Vector3(.5f,.5f,0f));
+        Vector3 CubePosition = gameObject.transform.position;
         if (Input.GetMouseButtonDown(0) == true)
         {
             if (Physics.Raycast(TargetLocation, fpsCam.transform.forward, out Hit, weaponRange))
             {
                 GameMaster.gameMaster.testMoveStructure.AddObjectAndParticleSystem(Hit.point,
-                    Type, MoveEffect);
+                    Type, MoveEffect, CubePosition,gameObject.transform);
             }
             else
             {
                 GameMaster.gameMaster.testMoveStructure.AddObjectAndParticleSystem(TargetLocation + (fpsCam.transform.forward * weaponRange),
-                    Type, MoveEffect);
+                    Type, MoveEffect, CubePosition,gameObject.transform);
             }
         }
     }
