@@ -48,17 +48,17 @@ public class ParticleTest : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            PS.Play();
-        }
-        Input.GetMouseButtonDown(0);
-        // transform.LookAt(Target.transform);
-        if (MoveType != GetComponentInParent<PlayerHit>().CurrentMove)
-        {
-            PS.Clear();
-            MoveType = GetComponentInParent<PlayerHit>().CurrentMove;
-            InitPS();
-        }
+        //if (Input.GetMouseButtonDown(0))
+        //{
+        //    PS.Play();
+        //}
+        //Input.GetMouseButtonDown(0);
+        //// transform.LookAt(Target.transform);
+        //if (MoveType != GetComponentInParent<PlayerHit>().CurrentMove)
+        //{
+        //    PS.Clear();
+        //    MoveType = GetComponentInParent<PlayerHit>().CurrentMove;
+        //    InitPS();
+        //}
     }
 }

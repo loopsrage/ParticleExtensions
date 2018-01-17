@@ -198,12 +198,15 @@ public static class ParticleExten
         ParticleSystemCollisionType Type = ParticleSystemCollisionType.World,
         bool DynamicColliders = true,
         bool SendMessages = true,
-        string[] MaskNames = null // Set Outside, selects Default if none)
+        string[] MaskNames = null, // Set Outside, selects Default if none)
+        float BounceMin = 0f,
+        float BounceMax = 0f
         )
     {
         ParticleSystem.CollisionModule collisionModule = PS.collision;
         // Collision Settings
         collisionModule.enabled = enabled;
+        collisionModule.bounce = new ParticleSystem.MinMaxCurve(BounceMin,BounceMax);
         collisionModule.colliderForce = ColliderForce;
         collisionModule.radiusScale = RadiusScale;
         collisionModule.mode = Mode;

@@ -13,11 +13,13 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows64:19</UnityBuildTarget>
     <UnityVersion>2017.2.0f3</UnityVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <LangVersion>4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -226,11 +228,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\GameMaster.cs" />
+    <Compile Include="Assets\MoveCastTest.cs" />
     <Compile Include="Assets\Moves.cs" />
     <Compile Include="Assets\ParticleExtensions.cs" />
     <Compile Include="Assets\ParticleTest.cs" />
     <Compile Include="Assets\PlayerHit.cs" />
     <Compile Include="Assets\ScriptableParticle.cs" />
+    <Compile Include="Assets\TestMoveStructure.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Standard Assets\Characters\FirstPersonCharacter\FirstPersonCharacterGuidelines.txt" />

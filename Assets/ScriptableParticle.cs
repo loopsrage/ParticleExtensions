@@ -116,8 +116,7 @@ public class ScriptableParticle : ScriptableObject
                 // Light Settings
                 PS.ParticleLightSettings(false, 1, EmissionCurve, "Point light");
 
-                // Renderer settings
-                PS.ParticleRendererSettings(true, "Capsule", "nomat", "BLT", ParticleSystemRenderMode.Mesh);
+
 
                 // Rotation Settings:
                 PS.ParticleRotationSettings();
@@ -139,6 +138,8 @@ public class ScriptableParticle : ScriptableObject
 
                 PS.ParticleSubSettings(true, SubObject);
 
+                // Renderer settings
+                PS.ParticleRendererSettings(true, "Capsule", "nomat", "BLT", ParticleSystemRenderMode.Mesh);
                 break;
             case MoveData.MoveTypes.Ice:
                 // Main Settings
@@ -256,25 +257,26 @@ public class ScriptableParticle : ScriptableObject
 
                 // Sub Particle Settings
                 SPS = SubObject.GetComponent<ParticleSystem>();
-                SPSCurve = new AnimationCurve();
-                SPSCurve.AddKey(0f, 10f);
-                Bursts = new ParticleSystem.Burst[]
-                {
-                        new ParticleSystem.Burst(1f,1,1,1f)
-                };
-                SPS.ParticleEmissionSettings(true, 1f, false, true, Bursts);
-                SPS.ParticleMainSettings(true, 2f, 1f, 0f, 2f, 3f);
-                SPS.ParticleNoiseSettings(true, 10, 15f, 10);
-                SPS.ParticleShapeSettings(true, ParticleSystemShapeType.Circle, ParticleSystemShapeMultiModeValue.Loop, false, 0f, 0f, 5f);
-                SPS.ParticleTrailSettings(true, ParticleSystemTrailTextureMode.Stretch, 2f, false, false);
-                SPS.ParticleRendererSettings(true, "Capsule", "nomat", "BLT", ParticleSystemRenderMode.Stretch);
+                selectParticleEffects(SubObject,MoveData.MoveTypes.Rock,MoveData.MoveBehaviorsGeneric.Ball);
+                //SPSCurve = new AnimationCurve();
+                //SPSCurve.AddKey(0f, 10f);
+                //Bursts = new ParticleSystem.Burst[]
+                //{
+                //        new ParticleSystem.Burst(1f,1,1,1f)
+                //};
+                //SPS.ParticleEmissionSettings(true, 1f, false, true, Bursts);
+                //SPS.ParticleMainSettings(true, 2f, 1f, 0f, 2f, 3f);
+                //SPS.ParticleNoiseSettings(true, 10, 15f, 10);
+                //SPS.ParticleShapeSettings(true, ParticleSystemShapeType.Circle, ParticleSystemShapeMultiModeValue.Loop, false, 0f, 0f, 5f);
+                //SPS.ParticleTrailSettings(true, ParticleSystemTrailTextureMode.Stretch, 2f, false, false);
+                //SPS.ParticleRendererSettings(true, "Capsule", "nomat", "BLT", ParticleSystemRenderMode.Stretch);
 
                 PS.ParticleSubSettings(true, SubObject);
 
-                // Rotation Settings
+                //// Rotation Settings
                 PS.ParticleRotationSettings(true, 1, 0f, ParticleSystemCurveMode.TwoConstants);
 
-                // Renderer settings
+                //// Renderer settings
                 PS.ParticleRendererSettings(true, "Capsule", "Smoke", "nomat", ParticleSystemRenderMode.HorizontalBillboard);
                 break;
             default:
