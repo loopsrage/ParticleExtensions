@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class TestMoveStructure : ScriptableObject
 {
-    string[] Layers = new string[] { "Players" };
+    string[] Layers = new string[] { "Players","Default" };
     public enum TempMoves
     {
         Storm,
@@ -90,6 +90,24 @@ public class TestMoveStructure : ScriptableObject
                     PS.ParticleCollisionSettings(true, 0, 0f, ParticleSystemCollisionMode.Collision3D, ParticleSystemCollisionQuality.High,
                         ParticleSystemCollisionType.World, true, true, Layers);
                 }
+                if (tempMove == TempMoves.Beam)
+                {
+                    Bursts = new ParticleSystem.Burst[]
+                    {
+                        new ParticleSystem.Burst(0.1f,5),
+                        new ParticleSystem.Burst(0.2f,5),
+                        new ParticleSystem.Burst(0.3f,5),
+                        new ParticleSystem.Burst(0.4f,5)
+                    };
+                    PS.ParticleEmissionSettings(true, 1f, false, true, Bursts);
+                    PS.ParticleMainSettings(false, 0f, 0.1f, 20f, 0.4f, 0.1f);
+                    PS.ParticleNoiseSettings(true, 10, 15f, 10);
+                    PS.ParticleShapeSettings(true, ParticleSystemShapeType.Cone, ParticleSystemShapeMultiModeValue.Random, false, 0f, 0f, 0f);
+                    PS.ParticleTrailSettings(true, ParticleSystemTrailTextureMode.Stretch, 0.1f, false, false);
+                    PS.ParticleRendererSettings(true, "Capsule", "nomat", "BLT", ParticleSystemRenderMode.Stretch);
+                    PS.ParticleCollisionSettings(true, 0, 0f, ParticleSystemCollisionMode.Collision3D, ParticleSystemCollisionQuality.High,
+                        ParticleSystemCollisionType.World, true, true, Layers);
+                }
                 break;
             case MoveData.MoveTypes.Ice:
                 if (tempMove == TempMoves.Storm)
@@ -128,7 +146,24 @@ public class TestMoveStructure : ScriptableObject
                     PS.ParticleCollisionSettings(true, 0, 0f, ParticleSystemCollisionMode.Collision3D, ParticleSystemCollisionQuality.High,
                         ParticleSystemCollisionType.World, true, true, Layers, 0.5f, 0.5f);
                 }
-                break;
+                if (tempMove == TempMoves.Beam)
+                {
+                    Bursts = new ParticleSystem.Burst[]
+                    {
+                        new ParticleSystem.Burst(0.1f,2),
+                        new ParticleSystem.Burst(0.3f,2),
+                        new ParticleSystem.Burst(0.5f,2)
+                    };
+                    PS.ParticleEmissionSettings(false, 1f, false, true, Bursts);
+                    PS.ParticleMainSettings(true, 1f, 0.1f, 6f, 4f, 0.1f);
+                    PS.ParticleShapeSettings(true, ParticleSystemShapeType.Sphere, ParticleSystemShapeMultiModeValue.Random, false, 0f, 0f, 1f);
+                    PS.ParticleTrailSettings(false, ParticleSystemTrailTextureMode.Stretch, 5f, false, false);
+                    PS.ParticleRendererSettings(true, "Capsule", "RockMat", "RockMat", ParticleSystemRenderMode.Mesh);
+                    PS.ParticleCollisionSettings(true, 0, 0f, ParticleSystemCollisionMode.Collision3D, ParticleSystemCollisionQuality.High,
+                        ParticleSystemCollisionType.World, true, true, Layers, 0.5f, 0.5f);
+                }
+
+                    break;
             default:
                 break;
         }
@@ -203,26 +238,52 @@ public class TestMoveStructure : ScriptableObject
 
                 break;
             case TempMoves.Beam:
-                PS.ParticleMainSettings(false,0f,1f,10f,3f,0f);
-                Bursts = new ParticleSystem.Burst[]
+                if (moveTypes == MoveData.MoveTypes.Rock)
                 {
-                    new ParticleSystem.Burst(0.0f,3),
-                    new ParticleSystem.Burst(0.1f,4),
-                    new ParticleSystem.Burst(0.2f,5),
-                    new ParticleSystem.Burst(0.4f,4),
-                    new ParticleSystem.Burst(0.5f,3)
-                };
-                PS.ParticleEmissionSettings(true, 1f, true, false, null,null,ParticleSystemCurveMode.Constant,20);
-                // Size Settings
-                SizeCurve = new AnimationCurve();
-                SizeCurve.AddKey(0f, 1f);
-                SizeCurve.AddKey(0.5f, 3f);
-                SizeCurve.AddKey(1f, 1f);
-                PS.ParticleSizeOverLifetimeSettings(true, 1, SizeCurve);
-                PS.ParticleShapeSettings(true, ParticleSystemShapeType.Cone, ParticleSystemShapeMultiModeValue.Loop, false, 0f, 0f, 0f, 0f, 0f, 0f);
+                    Bursts = new ParticleSystem.Burst[]
+                    {
+                        new ParticleSystem.Burst(0.0f,2),
+                        new ParticleSystem.Burst(1.1f,1),
+                        new ParticleSystem.Burst(2.2f,2),
+                        new ParticleSystem.Burst(3.4f,1),
+                        new ParticleSystem.Burst(4.5f,2)
+                    };
+                    PS.ParticleMainSettings(false,1f,1f,80f,3f,0f);
+                    PS.ParticleEmissionSettings(true, 1f, true, true, Bursts,null,ParticleSystemCurveMode.Constant,6);
+                    PS.ParticleShapeSettings(true, ParticleSystemShapeType.Cone, ParticleSystemShapeMultiModeValue.BurstSpread, false, 0f, 0f, 0.7f, 0f, 0f, 0f);
+                    PS.ParticleCollisionSettings(true, 0, 0f, ParticleSystemCollisionMode.Collision3D, ParticleSystemCollisionQuality.High,
+                        ParticleSystemCollisionType.World, true, true, Layers,0f,1f);
+                }
+                else
+                {
+                    PS.ParticleShapeSettings(true, ParticleSystemShapeType.Cone, ParticleSystemShapeMultiModeValue.Loop, false, 0f, 0f, 0f, 0f, 0f, 0f);
+                    SizeCurve = new AnimationCurve();
+                    SizeCurve.AddKey(0f, 1f);
+                    SizeCurve.AddKey(0.5f, 3f);
+                    SizeCurve.AddKey(1f, 1f);
+                    PS.ParticleSizeOverLifetimeSettings(true, 1, SizeCurve);
+                    PS.ParticleCollisionSettings(true, 0, 0f, ParticleSystemCollisionMode.Collision3D, ParticleSystemCollisionQuality.High,
+                        ParticleSystemCollisionType.World, true, true, Layers);
+                }
+                if (moveTypes == MoveData.MoveTypes.Fire)
+                {
+                    PS.ParticleMainSettings(false, 0f, 1f, 10f, 10f, 0f);
+                    PS.ParticleEmissionSettings(true, 1f, true, false, null, null, ParticleSystemCurveMode.Constant, 20);
+                }
+                if (moveTypes == MoveData.MoveTypes.Lightning)
+                {
+                    PS.ParticleMainSettings(false, 0f, 1f, 100f, 0.5f, 0f);
+                    PS.ParticleEmissionSettings(true, 1f, true, false, null, null, ParticleSystemCurveMode.Constant, 20);
+                    PS.ParticleNoiseSettings(true,10,14,10);
+                }
+                if (moveTypes == MoveData.MoveTypes.Ice)
+                {
+                    PS.ParticleMainSettings(false, 0f, 1f, 10f, 3f, 0f);
+                    PS.ParticleEmissionSettings(true, 1f, true, false, null, null, ParticleSystemCurveMode.Constant, 20);
+                }
                 PS.ParticleCollisionSettings(true, 0, 0f, ParticleSystemCollisionMode.Collision3D, ParticleSystemCollisionQuality.High,
                     ParticleSystemCollisionType.World, true, true, Layers);
-                PS.ParticleSubSettings(false, AddSubParticle(ThisObject,moveTypes,tempMove));
+                PS.ParticleSubSettings(true, AddSubParticle(ThisObject,moveTypes,tempMove));
                 PS.ParticleTrailSettings(true,ParticleSystemTrailTextureMode.DistributePerSegment,1f,true,true);
                 PS.ParticleRotationSettings(true, 1, 0f, ParticleSystemCurveMode.TwoConstants,100f,200f);
                 MaterialSelection(moveTypes,ThisObject);
